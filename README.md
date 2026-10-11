@@ -5,12 +5,18 @@
 </p>
 
 <p align="center">
+  <a href="https://wildlens-qkuh.onrender.com/">
+    <img src="https://img.shields.io/badge/Live_App-wildlens--qkuh.onrender.com-265826?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo" />
+  </a>
+</p>
+
+<p align="center">
   <a href="#overview">Overview</a> •
-  <a href="#key-features">Key Features</a> •
   <a href="#screenshots">Screenshots</a> •
+  <a href="#key-features">Key Features</a> •
   <a href="#architecture--tech-stack">Tech Stack</a> •
-  <a href="#getting-started">Getting Started</a> •
-  <a href="#deployment-on-render">Deploy on Render</a> •
+  <a href="#project-structure">Project Structure</a> •
+  <a href="#design-principles">Design Principles</a> •
   <a href="#license">License</a>
 </p>
 
@@ -23,6 +29,8 @@
 Point your camera or upload a photo of any flower, tree bark, raptor, pollinator, or fungi. WildLens instantly delivers taxonomic classification, field safety warnings (toxic lookalikes, edible traits, handling precautions), distinguishing morphological markers, and narrated audio guides. 
 
 When you're ready to head outside, generate a **Seasonal Outdoor Quest** with habitat-specific scavenger hunts and log every observation directly to your private, offline-first **Nature Field Journal**.
+
+🔗 **Live Deployment**: [https://wildlens-qkuh.onrender.com/](https://wildlens-qkuh.onrender.com/)
 
 ---
 
@@ -77,85 +85,13 @@ When you're ready to head outside, generate a **Seasonal Outdoor Quest** with ha
 
 | Layer | Technology | Purpose |
 |---|---|---|
+| **Live Runtime** | [Render](https://render.com) | Production cloud hosting with continuous deployment |
 | **Framework** | [Next.js](https://nextjs.org/) (App Router, Turbopack) | Fast, responsive full-stack React framework |
 | **Styling** | Vanilla CSS Tokens & Tailwind CSS | Natural organic aesthetic (earth greens, terracotta, warm stone) |
 | **Vision & Taxonomy** | Google GenAI SDK | Morphological classification & structured JSON extraction |
 | **Voice Narration** | ElevenLabs API | Warm, natural documentary-style field audio narration |
 | **Geocoding** | OpenStreetMap Nominatim API | Reverse geocoding for habitat localization |
-| **Storage** | Browser `localStorage` | Private, offline-capable field journal persistence |
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (version 18 or higher)
-- `npm`, `yarn`, or `pnpm`
-
-### Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/ayushg-1506/WildLens.git
-   cd WildLens
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Open `.env.local` and add your keys:
-   ```env
-   # Required: Google AI Studio key for vision & taxonomy
-   GOOGLE_AI_API_KEY=your_google_ai_key_here
-
-   # Optional: ElevenLabs key for audio field guide narration
-   ELEVENLABS_API_KEY=your_elevenlabs_key_here
-   ```
-   > *Get a free Google AI key at [aistudio.google.com](https://aistudio.google.com/apikey).*
-
-4. **Start the local development server**:
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## Deployment on Render
-
-WildLens is configured for zero-friction deployment on [Render](https://render.com).
-
-### Option 1: Using the Render Blueprint (`render.yaml`)
-
-1. Push your repository to GitHub.
-2. Log into the [Render Dashboard](https://dashboard.render.com).
-3. Click **New +** → **Blueprint**.
-4. Connect your `WildLens` repository.
-5. Render will automatically detect `render.yaml` and configure the Web Service.
-6. Under Environment Variables, enter your `GOOGLE_AI_API_KEY` (and optionally `ELEVENLABS_API_KEY`).
-7. Click **Apply**. Render will install dependencies, build the Next.js app, and deploy it live.
-
-### Option 2: Manual Web Service Setup on Render
-
-1. Log in to [Render](https://dashboard.render.com) and click **New +** → **Web Service**.
-2. Connect your GitHub repository: `ayushg-1506/WildLens`.
-3. Configure the following build settings:
-   - **Environment**: `Node`
-   - **Plan**: `Free`
-   - **Build Command**: `npm install && npm run build`
-   - **Start Command**: `npm start`
-4. Add Environment Variables:
-   - `GOOGLE_AI_API_KEY` = *your Google AI Studio key*
-   - `ELEVENLABS_API_KEY` = *your ElevenLabs key (optional)*
-   - `NODE_VERSION` = `20`
-5. Click **Create Web Service**. Your app will be live with an automatic HTTPS URL (e.g., `https://wildlens.onrender.com`).
+| **Storage** | Browser `localStorage` | Private, offline-capable field journal preservation |
 
 ---
 
@@ -171,7 +107,7 @@ WildLens/
 │   │   ├── api/
 │   │   │   ├── identify/    # Multimodal taxonomy & safety API route
 │   │   │   ├── quest/       # Seasonal scavenger hunt generator API route
-│   │   │   └── tts/         # Naturalist voice synthesis API route
+│   │   └── tts/             # Naturalist voice synthesis API route
 │   │   ├── explore/         # Outdoor Quests page
 │   │   ├── identify/        # Specimen recognition & audio guide page
 │   │   ├── journal/         # Offline field journal & herbarium page
